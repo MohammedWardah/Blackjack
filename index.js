@@ -1,8 +1,8 @@
 //Blackjack game logic:
 
 const messageEl = document.getElementById("message-el");
-const sumEl = document.getElementById("sum-el");
 const cardsEl = document.getElementById("cards-el");
+const sumEl = document.getElementById("sum-el");
 
 let firstCard;
 let secondCard;
@@ -40,10 +40,17 @@ function checkWin() {
 function displayInfo() {
   messageEl.textContent = message;
   sumEl.textContent = "Sum: " + sum;
-  cardsEl.textContent = "Cards: " + cards.join(" + ");
+  //cardsEl.textContent = "Cards: " + cards.join(" + "); Too Simple!
+  cardsEl.textContent = "Cards: ";
+  for (let i = 0; i < cards.length; i++) {
+    cardsEl.textContent += cards[i] + " + ";
+  }
+  if (cardsEl.textContent.endsWith(" + ")) {
+    cardsEl.textContent = cardsEl.textContent.slice(0, -3);
+  }
 }
 
-function newCard() {
+function drawNewCard() {
   let drawnCard = Math.floor(Math.random() * 10) + 2;
   sum += drawnCard;
   cards.push(drawnCard);
